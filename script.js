@@ -137,7 +137,6 @@ function resetGame() {
 reset.addEventListener("click", resetGame);
 
 
-
 //kleine puntjes: Sommige functies zijn in het engels alles moet dezelfde taal hebben
 //ik heb meerdere "geef" en "verlaag" functies, dit kan ik korter schrijven in een if statement of switchcase
 //game-over jingle blijft spelen omdat ik gameOver aanroep in de verlaag functies.
