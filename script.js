@@ -46,7 +46,50 @@ function geefHappy() {
 happyBtn.addEventListener("click", geefHappy);
 
 
-//---------------------BLOK 2 WAARDE ------------------------------------//
+//-------------BLOK 2 IMAGE CHANGE------------------//
+
+
+//checkstats functie: met behulp lesopdracht 4a "lightbulb", MDN.COM en Chatgpt
+//Afbeelding wordt aangepast zodra de bar 50 punten laag is
+function checkStats() {
+    console.log(waterBar.value);
+
+    if (waterBar.value >= 50) {
+        plant.src = "image/alo-vera-happy.png";
+        
+    }
+    else {
+        plant.src = "image/alo-vera-thirsty.png";
+        
+    }
+    
+}
+
+//-----------BLOK 4 GAME OVER TEXT AND SOUND-----------------------------------//
+
+
+// gameOver functie: Met behulp van ifElse kennis clip op DLO, inzicht code klasgenoot en Chatgpt
+//functie zorgt ervoor dat "game over tekst tevoorschijn komt"
+
+//Rubriek onderdeel complexiteit: 1 niet in de les behandelde javascript aspect: Muziek
+//Bron: Youtube: "Sounds and Music in JavaScript games" by Kenny Yip Coding
+// Audio source: https://pixabay.com/sound-effects/search/game/
+// Met behulp van chat gpt
+
+function gameOver() {
+
+    if (waterBar.value <= 0 || sunBar.value <= 0 || happyBar.value <= 0) {
+        
+        gameText.textContent = "Game Over";
+        gameOverSound.play();
+
+        console.log("Game Over");
+
+    }
+    //hier kan je die dead state plant image neerzetten
+}
+
+//---------------------BLOK 3 WAARDE AND GAME OVER------------------------------------//
 
 //Bar waarde omlaag functies: Met kennis clips: functies, recap&console op DLO, inzicht code klasgenoot, chatgpt
 //haalt waarde omlaag van de water bar
@@ -80,49 +123,7 @@ function verlaagHappy() {
 setInterval(verlaagHappy, 2000);
 
 
-//-----------BLOK 3 GAME OVER TEXT AND SOUND-----------------------------------//
-
-
-// gameOver functie: Met behulp van ifElse kennis clip op DLO, inzicht code klasgenoot en Chatgpt
-//functie zorgt ervoor dat "game over tekst tevoorschijn komt"
-function gameOver() {
-
-    if (waterBar.value <= 0 || sunBar.value <= 0 || happyBar.value <= 0) {
-        
-        gameText.textContent = "Game Over";
-        gameOverSound.play();
-
-        console.log("Game Over");
-
-    }
-}
-
-
-//-------------BLOK 4 IMAGE CHANGE------------------//
-
-
-//checkstats functie: met behulp lesopdracht 4a "lightbulb", MDN.COM en Chatgpt
-//Afbeelding wordt aangepast zodra de bar 50 punten laag is
-function checkStats() {
-    console.log(waterBar.value);
-
-    if (waterBar.value >= 50) {
-        plant.src = "image/alo-vera-happy.png";
-        // imageStatus = true;
-    }
-    else {
-        plant.src = "image/alo-vera-thirsty.png";
-        // imageStatus = false;
-    }
-    
-}
-//checkstats staat buiten de functie (scope) want anders zou hij zichzelf steeds opnieuw aanroepen
-//zonder dit zou de afbeelding nog steeds veranderen maar niet wanneer de pagina laadt
-checkStats();
-
-
 //------------BLOK 5 RESET-------------------//
-   
 
 // met behulp van chatgpt en kennis clip: Eventlistener, Functies op DLO                                                                                                                                                                                                                                                                           
 function resetGame() {
@@ -130,28 +131,19 @@ function resetGame() {
     waterBar.value = 100;
     sunBar.value = 100;
     happyBar.value = 100;
-
-    checkStats();
+    gameText.textContent = ""; 
 }
 
 reset.addEventListener("click", resetGame);
 
 
-//------------BLOK 6 AUDIO-------------------//
 
+//kleine puntjes: Sommige functies zijn in het engels alles moet dezelfde taal hebben
+//ik heb meerdere "geef" en "verlaag" functies, dit kan ik korter schrijven in een if statement of switchcase
+//game-over jingle blijft spelen omdat ik gameOver aanroep in de verlaag functies.
+//Ookal is de game voorbij blijft de verlaag functie runnen
+//regel 28(ish) kan ik ook verkorten door van waterbar.value een variabele te maken
 
-//Rubriek onderdeel complexiteit: 1 niet in de les behandelde javascript aspect: Muziek
-//Bron: Youtube: "Sounds and Music in JavaScript games" by Kenny Yip Coding
-// Audio source: https://pixabay.com/sound-effects/search/game/
-// Met behulp van chat gpt
-
-// let gameOverSound = new Audio("music/alphix-game-over.mp3");
-// gameOverSound.volume = true;
-
-// function gameOver() {
-//     if (waterBar.value <= 0 || sunBar.value <= 0 || happyBar.value <= 0) {
-//         console.log("Game Over");
-
-//         gameOverSound.play();
-//     }
-// }
+//Gefixt: check states was eerst zowel buiten de scope als binnen de scope, dat was dubbel op
+//"game over" bleef staan en ookal is het niet de meest nette manier heb ik door 
+// gameText.textContent = ""; te gebruiken de tekst wel weg kunnen halen wanneer je op rest drukt
